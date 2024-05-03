@@ -1,9 +1,5 @@
 import ClassRoom from './0-classroom';
 
-const initializeRooms = () => [
-  new ClassRoom(19),
-  new ClassRoom(20),
-  new ClassRoom(34)
-];
-
-export default initializeRooms;
+export default function initializeRooms() {
+  return [19, 20, 34].map((value) => new ClassRoom(value));
+}
