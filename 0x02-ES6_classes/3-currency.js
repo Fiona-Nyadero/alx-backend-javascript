@@ -8,16 +8,16 @@ class Currency {
     return this._code;
   }
 
-  set code(newCode) {
-    this._code = newCode;
+  set code(neuCode) {
+    this._code = neuCode;
   }
 
   get name() {
     return this._name;
   }
 
-  set name(newName) {
-    this._name = newName;
+  set name(neuName) {
+    this._name = neuName;
   }
 
   displayFullCurrency() {
