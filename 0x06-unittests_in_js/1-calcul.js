@@ -1,17 +1,17 @@
 function calculateNumber(type, a, b) {
-    a = Math.round(a);
-    b = Math.round(b);
+    roundeda = Math.round(a);
+    roundedb = Math.round(b);
 
     switch (type) {
       case 'SUM':
-        return a + b;
+        return roundeda + roundedb;
       case 'SUBTRACT':
-        return a - b;
+        return roundeda - roundedb;
       case 'DIVIDE':
-        if (b === 0) {
+        if (roundedb === 0) {
             return 'Error';
         }
-        return a / b;
+        return roundeda / roundedb;
       default:
         throw new Error('Invalid operation type');
     }
