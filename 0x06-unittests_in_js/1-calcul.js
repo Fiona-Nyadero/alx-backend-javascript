@@ -9,9 +9,11 @@ function calculateNumber(type, a, b) {
         return a - b;
       case 'DIVIDE':
         if (b === 0) {
-          throw new Error('Division by 0!');
+            return 'Error';
         }
         return a / b;
+      default:
+        throw new Error('Invalid operation type');
     }
 }
   
