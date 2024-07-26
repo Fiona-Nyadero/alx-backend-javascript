@@ -18,7 +18,7 @@ function countStudents(path) {
             const firstname = columns[0];
             if (students >= 0) {
               if (!Object.hasOwnProperty.call(table, field)) {
-                hashtable[field] = [];
+                table[field] = [];
               }
               table[field] = [...table[field], firstname];
             }
