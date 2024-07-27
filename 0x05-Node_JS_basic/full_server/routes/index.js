@@ -1,37 +1,12 @@
-import readDatabase from '../utils';
+import express from 'express';
+import AppController from '../controllers/AppController';
+import StudentsController from '../controllers/StudentsController';
 
-class StudentsController {
-  static getAllStudents(request, response) {
-    readDatabase(process.argv[2])
-      .then((data) => {
-        let out = 'This is the list of our students\n';
-        for (const key in data) {
-          if (Object.hasOwnProperty.call(data, key)) {
-            out += `Number of students in ${key}: ${data[key].length}. List: ${data[key].join(', ')}\n`;
-          }
-        }
-        return response.status(200).send(out);
-      })
-      .catch(() => {
-        response.status(500).send('Cannot load the database');
-      });
-  }
+const router = express.Router();
 
-  static getAllStudentsByMajor(request, response) {
-    if (!['CS', 'SWE'].includes(request.params.major)) {
-      return response.status(500).send('Major parameter must be CS or SWE');
-    }
-    return readDatabase(process.argv[2])
-      .then((data) => {
-        if (!data[request.params.major]) {
-          return response.status(500).send('Cannot load the database');
-        }
-        return response.status(200).send(`List: ${data[request.params.major].join(', ')}`);
-      })
-      .catch(() => {
-        response.status(500).send('Cannot load the database');
-      });
-  }
-}
+router.get('/', AppController.getHomepage);
+router.get('/students', StudentsController.getAllStudents);
+router.get('/students/:major', StudentsController.getAllStudentsByMajor);
 
-export default StudentsController;
+export default router;
+

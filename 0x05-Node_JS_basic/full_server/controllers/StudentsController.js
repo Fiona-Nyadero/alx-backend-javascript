@@ -10,7 +10,7 @@ class StudentsController {
             out += `Number of students in ${key}: ${data[key].length}. List: ${data[key].join(', ')}\n`;
           }
         }
-        return response.status(200).send(output);
+        return response.status(200).send(out);
       })
       .catch(() => {
         response.status(500).send('Cannot load the database');
@@ -35,3 +35,4 @@ class StudentsController {
 }
 
 export default StudentsController;
+
