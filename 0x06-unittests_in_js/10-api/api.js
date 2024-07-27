@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+const port = 7865;
 
 app.use(express.json());
 
@@ -8,32 +9,33 @@ app.get('/', (req, res) => {
   res.send('Welcome to the payment system');
 });
 
-app.listen(7865, () => {
-  console.log('API available on localhost port 7865');
-});
-
 app.get('/cart/:id([0-9]+)', (req, res) => {
-  res.send(`Payment methods for cart ${req.params.id}`);
+    res.send(`Payment methods for cart ${req.params.id}`);
 });
 
-app.get('/avaiable_payments', (req, res) => {
-  res.get('"Content-Type', 'application/json');
-  const paymenttypes = {
-  payment_methods: {
-        credit_cards: true,
-        paypal: false
-  }
-  }
-  res.send(paymentOptions);
+app.get('/available_payments', (req, res) => {
+    res.set("Content-Type", "application/json");
+    const paymentOptions = {
+    payment_methods: {
+          credit_cards: true,
+          paypal: false
+    }
+    }
+    res.send(paymentOptions);
 });
 
 app.post('/login', (req, res) => {
-  const returnUser = req.body.user || req.body.userName;
-  if (returnUser) {
-  res.send(`Welcome $(user)`);
-  } else {
-  res.status(404).send();
-  res.write
+    const user = req.body.user || req.body.userName;
+    if (user) {
+    res.send(`Welcome ${user}`);
+    } else {
+    res.status(404).send();
+    }
+});
+
+app.listen(port, () => {
+    console.log(`API available on localhost port ${port}`);
 });
 
 module.exports = app;
+
