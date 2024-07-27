@@ -3,18 +3,18 @@ const {describe, it} = require("mocha");
 const expect = require("chai").expect;
 
 describe("Home page", function() {
-    const choices = {
+    const options = {
     url: "http://localhost:7865/",
     method: "GET"
     }
     it("check correct status code", function(done) {
-    request(choices, function(err, res, body) {
+    request(options, function(err, res, body) {
         expect(res.statusCode).to.equal(200);
         done();
     });
     });
     it("check correct content", function(done) {
-    request(choices, function(err, res, body) {
+    request(options, function(err, res, body) {
         expect(body).to.equal("Welcome to the payment system");
         done();
     });
@@ -53,18 +53,18 @@ describe("Available_payments page", function() {
     });
     });
     it("check correct body content for correct url", function() {
-    const choice = {json: true};
-    const paymentMethods = {
+    const option = {json: true};
+    const payLoad = {
         payment_methods: {
         credit_cards: true,
         paypal: false
         }
     }
-    request.get("http://localhost:7865/available_payments", choice, (err, res, body) => {
+    request.get("http://localhost:7865/available_payments", option, (err, res, body) => {
         if (err) {
         expect(res.statusCode).to.not.equal(200);
         } else {
-        expect(body).to.deep.equal(paymentMethods);
+        expect(body).to.deep.equal(payLoad);
         }
     });
     });
@@ -72,27 +72,27 @@ describe("Available_payments page", function() {
 
 describe("Login", function() {
     it("check correct status code for request that's sent properly", function(done) {
-    const option = {
+    const opt = {
         url: "http://localhost:7865/login",
         json: true,
 	    body: {
         user: 'JOE'
         }
     };
-    request.post(option, function(err, res, body) {
+    request.post(opt, function(err, res, body) {
         expect(res.statusCode).to.equal(200);
         done();
     });
     });
     it("check correct content for request that's sent properly", function(done) {
-    const options = {
+    const opts = {
         url: "http://localhost:7865/login",
         json: true,
         body: {
         user: 'JOE'
         }
     };
-    request.post(options, function(err, res, body) {
+    request.post(opts, function(err, res, body) {
         if (err) {
         expect(res.statusCode).to.not.equal(200);
         } else {
@@ -102,14 +102,14 @@ describe("Login", function() {
     });
     });
     it("check correct status code for request that's not sent properly", function(done) {
-    const opt = {
+    const op = {
         url: "http://localhost:7865/login",
         json: true,
         body: {
         usr: 'JOE'
         }
     };
-    request.post(opt, function(err, res, body) {
+    request.post(op, function(err, res, body) {
         expect(res.statusCode).to.equal(404);
         done();
     });
